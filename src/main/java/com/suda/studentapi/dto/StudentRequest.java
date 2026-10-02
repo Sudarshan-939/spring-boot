@@ -1,43 +1,37 @@
 package com.suda.studentapi.dto;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class StudentRequest {
 
-    @NotBlank(message = "Register number cannot be empty")
-    @Size(max = 30, message = "Register number cannot exceed 30 characters")
+    @NotBlank(message = "Register number must not be blank")
     private String registerNo;
 
-    @NotBlank(message = "Name cannot be empty")
-    @Size(max = 100, message = "Name cannot exceed 100 characters")
+    @NotBlank(message = "Name must not be blank")
     private String name;
 
-    @NotBlank(message = "Email cannot be empty")
-    @Email(message = "Invalid email address")
+    @NotBlank(message = "Email must not be blank")
+    @Email(message = "Invalid email format")
     private String email;
 
-    @NotBlank(message = "Phone number cannot be empty")
-    @Pattern(
-            regexp = "^[0-9]{10}$",
-            message = "Invalid phone number"
-    )
+    @NotBlank(message = "Phone must not be blank")
     private String phone;
 
-    @NotBlank(message = "Department cannot be empty")
-    private String department;
+    @NotBlank(message = "Department ID must not be blank")
+    private String departmentId;
 
-    @NotNull(message = "Year is required")
-    @Min(value = 1, message = "Year must be between 1 and 4")
-    @Max(value = 4, message = "Year must be between 1 and 4")
+    @NotNull(message = "Year must not be null")
     private Integer year;
 
-    @NotNull(message = "Semester is required")
-    @Min(value = 1, message = "Semester must be between 1 and 8")
-    @Max(value = 8, message = "Semester must be between 1 and 8")
+    @NotNull(message = "Semester must not be null")
     private Integer semester;
+
 
     public StudentRequest() {
     }
+
 
     public String getRegisterNo() {
         return registerNo;
@@ -47,6 +41,7 @@ public class StudentRequest {
         this.registerNo = registerNo;
     }
 
+
     public String getName() {
         return name;
     }
@@ -54,6 +49,7 @@ public class StudentRequest {
     public void setName(String name) {
         this.name = name;
     }
+
 
     public String getEmail() {
         return email;
@@ -63,6 +59,7 @@ public class StudentRequest {
         this.email = email;
     }
 
+
     public String getPhone() {
         return phone;
     }
@@ -71,13 +68,15 @@ public class StudentRequest {
         this.phone = phone;
     }
 
-    public String getDepartment() {
-        return department;
+
+    public String getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
     }
+
 
     public Integer getYear() {
         return year;
@@ -86,6 +85,7 @@ public class StudentRequest {
     public void setYear(Integer year) {
         this.year = year;
     }
+
 
     public Integer getSemester() {
         return semester;

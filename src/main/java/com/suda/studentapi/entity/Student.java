@@ -2,8 +2,6 @@ package com.suda.studentapi.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(
         name = "students",
@@ -17,52 +15,70 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "register_no", nullable = false, unique = true, length = 30)
+    @Column(
+            name = "register_no",
+            nullable = false,
+            unique = true,
+            length = 30
+    )
     private String registerNo;
 
-    @Column(name = "name", nullable = false, length = 100)
+    @Column(
+            name = "name",
+            nullable = false,
+            length = 100
+    )
     private String name;
 
-    @Column(name = "email", nullable = false, length = 150)
+    @Column(
+            name = "email",
+            nullable = false,
+            length = 150
+    )
     private String email;
 
-    @Column(name = "phone", nullable = false, length = 15)
+    @Column(
+            name = "phone",
+            nullable = false,
+            length = 15
+    )
     private String phone;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "department_id", nullable = false)
-    private Department department;
+    @Column(
+            name = "department_id",
+            nullable = false,
+            length = 20
+    )
+    private String departmentId;
 
-    @Column(name = "year", nullable = false)
+    @Column(
+            name = "year",
+            nullable = false
+    )
     private Integer year;
 
-    @Column(name = "semester", nullable = false)
+    @Column(
+            name = "semester",
+            nullable = false
+    )
     private Integer semester;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
 
-    @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    protected void onCreate() {
-        LocalDateTime now = LocalDateTime.now();
-        createdAt = now;
-        updatedAt = now;
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
-
+    // Default constructor
     public Student() {
     }
+
+
+    // Getters and Setters
 
     public Integer getId() {
         return id;
     }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 
     public String getRegisterNo() {
         return registerNo;
@@ -72,9 +88,6 @@ public class Student {
         this.registerNo = registerNo;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -84,6 +97,7 @@ public class Student {
         this.name = name;
     }
 
+
     public String getEmail() {
         return email;
     }
@@ -91,6 +105,7 @@ public class Student {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
     public String getPhone() {
         return phone;
@@ -100,13 +115,15 @@ public class Student {
         this.phone = phone;
     }
 
-    public Department getDepartment() {
-        return department;
+
+    public String getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
     }
+
 
     public Integer getYear() {
         return year;
@@ -116,19 +133,12 @@ public class Student {
         this.year = year;
     }
 
+
     public Integer getSemester() {
         return semester;
     }
 
     public void setSemester(Integer semester) {
         this.semester = semester;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
     }
 }

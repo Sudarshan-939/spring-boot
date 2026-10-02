@@ -4,9 +4,9 @@ import com.suda.studentapi.dto.DepartmentRequest;
 import com.suda.studentapi.dto.DepartmentResponse;
 import com.suda.studentapi.dto.StudentResponse;
 import com.suda.studentapi.entity.Department;
-import com.suda.studentapi.entity.Student;
 import com.suda.studentapi.exception.DepartmentNotFoundException;
 import com.suda.studentapi.repository.DepartmentRepository;
+import com.suda.studentapi.repository.StudentRepository;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,9 +18,13 @@ import java.util.List;
 public class DepartmentService {
 
     private final DepartmentRepository departmentRepository;
+        private final StudentRepository studentRepository;
 
-    public DepartmentService(DepartmentRepository departmentRepository) {
+        public DepartmentService(
+                        DepartmentRepository departmentRepository,
+                        StudentRepository studentRepository) {
         this.departmentRepository = departmentRepository;
+                this.studentRepository = studentRepository;
     }
 
     // GET all
@@ -113,9 +117,11 @@ public class DepartmentService {
                         )
                 );
 
-        return department.getStudents()
+        return studentRepository.findByDepartmentId(
+                        department.getDepartmentCode()
+                )
                 .stream()
-                .map(this::toStudentResponse)
+                .map(StudentResponse::new)
                 .toList();
     }
 
@@ -132,33 +138,6 @@ public class DepartmentService {
         response.setDepartmentName(
                 department.getDepartmentName()
         );
-
-        return response;
-    }
-
-    private StudentResponse toStudentResponse(
-            Student student) {
-
-        StudentResponse response =
-                new StudentResponse();
-
-        response.setId(student.getId());
-        response.setRegisterNo(student.getRegisterNo());
-        response.setName(student.getName());
-        response.setEmail(student.getEmail());
-        response.setPhone(student.getPhone());
-        response.setYear(student.getYear());
-        response.setSemester(student.getSemester());
-
-        if (student.getDepartment() != null) {
-            response.setDepartment(
-                    student.getDepartment().getDepartmentCode()
-            );
-
-            response.setDepartmentName(
-                    student.getDepartment().getDepartmentName()
-            );
-        }
 
         return response;
     }

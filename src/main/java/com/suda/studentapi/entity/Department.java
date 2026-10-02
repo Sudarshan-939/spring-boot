@@ -2,11 +2,13 @@ package com.suda.studentapi.entity;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
-@Table(name = "departments")
+@Table(
+        name = "departments",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "department_code")
+        }
+)
 public class Department {
 
     @Id
@@ -28,11 +30,8 @@ public class Department {
     )
     private String departmentName;
 
-    @OneToMany(
-            mappedBy = "department",
-            fetch = FetchType.LAZY
-    )
-    private List<Student> students = new ArrayList<>();
+    public Department() {
+    }
 
     public Integer getId() {
         return id;
@@ -56,13 +55,5 @@ public class Department {
 
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
-    }
-
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
     }
 }

@@ -1,6 +1,6 @@
 package com.suda.studentapi.dto;
 
-import java.time.LocalDateTime;
+import com.suda.studentapi.entity.Student;
 
 public class StudentResponse {
 
@@ -9,15 +9,27 @@ public class StudentResponse {
     private String name;
     private String email;
     private String phone;
-    private String department;
-    private String departmentName;
+    private String departmentId;
     private Integer year;
     private Integer semester;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+
 
     public StudentResponse() {
     }
+
+
+    public StudentResponse(Student student) {
+
+        this.id = student.getId();
+        this.registerNo = student.getRegisterNo();
+        this.name = student.getName();
+        this.email = student.getEmail();
+        this.phone = student.getPhone();
+        this.departmentId = student.getDepartmentId();
+        this.year = student.getYear();
+        this.semester = student.getSemester();
+    }
+
 
     public Integer getId() {
         return id;
@@ -27,6 +39,7 @@ public class StudentResponse {
         this.id = id;
     }
 
+
     public String getRegisterNo() {
         return registerNo;
     }
@@ -34,6 +47,7 @@ public class StudentResponse {
     public void setRegisterNo(String registerNo) {
         this.registerNo = registerNo;
     }
+
 
     public String getName() {
         return name;
@@ -43,6 +57,7 @@ public class StudentResponse {
         this.name = name;
     }
 
+
     public String getEmail() {
         return email;
     }
@@ -50,6 +65,7 @@ public class StudentResponse {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
     public String getPhone() {
         return phone;
@@ -59,21 +75,15 @@ public class StudentResponse {
         this.phone = phone;
     }
 
-    public String getDepartment() {
-        return department;
+
+    public String getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
     }
 
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
-    }
 
     public Integer getYear() {
         return year;
@@ -83,27 +93,12 @@ public class StudentResponse {
         this.year = year;
     }
 
+
     public Integer getSemester() {
         return semester;
     }
 
     public void setSemester(Integer semester) {
         this.semester = semester;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

@@ -3,9 +3,7 @@ package com.suda.studentapi.controller;
 import com.suda.studentapi.dto.StudentRequest;
 import com.suda.studentapi.dto.StudentResponse;
 import com.suda.studentapi.services.StudentService;
-
 import jakarta.validation.Valid;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +16,16 @@ public class StudentController {
 
     private final StudentService studentService;
 
+
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
 
-    // GET all students
+
+    // =====================================================
+    // GET ALL STUDENTS
+    // =====================================================
+
     @GetMapping
     public ResponseEntity<List<StudentResponse>> getAllStudents() {
 
@@ -31,7 +34,11 @@ public class StudentController {
         );
     }
 
-    // GET student by ID
+
+    // =====================================================
+    // GET STUDENT BY ID
+    // =====================================================
+
     @GetMapping("/{id}")
     public ResponseEntity<StudentResponse> getStudentById(
             @PathVariable Integer id) {
@@ -41,7 +48,11 @@ public class StudentController {
         );
     }
 
-    // POST student
+
+    // =====================================================
+    // CREATE STUDENT
+    // =====================================================
+
     @PostMapping
     public ResponseEntity<StudentResponse> createStudent(
             @Valid @RequestBody StudentRequest request) {
@@ -54,18 +65,27 @@ public class StudentController {
                 .body(response);
     }
 
-    // PUT student
+
+    // =====================================================
+    // UPDATE STUDENT
+    // =====================================================
+
     @PutMapping("/{id}")
     public ResponseEntity<StudentResponse> updateStudent(
             @PathVariable Integer id,
             @Valid @RequestBody StudentRequest request) {
 
-        return ResponseEntity.ok(
-                studentService.updateStudent(id, request)
-        );
+        StudentResponse response =
+                studentService.updateStudent(id, request);
+
+        return ResponseEntity.ok(response);
     }
 
-    // DELETE student
+
+    // =====================================================
+    // DELETE STUDENT
+    // =====================================================
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteStudent(
             @PathVariable Integer id) {
